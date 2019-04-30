@@ -88,7 +88,7 @@
 	<tr>
 		<td width="104" class="ct_write">구매자이름</td>
 		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${pVo.buyer.userName}</td>
+		<td class="ct_write01">${pVo.receiverName}</td>
 	</tr>
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
@@ -96,7 +96,7 @@
 	<tr>
 		<td width="104" class="ct_write">구매자연락처</td>
 		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${pVo.buyer.phone}</td>
+		<td class="ct_write01">${pVo.receiverPhone}</td>
 	</tr>
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
@@ -105,7 +105,7 @@
 	<tr>
 		<td width="104" class="ct_write">구매자주소</td>
 		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${pVo.buyer.addr}</td>
+		<td class="ct_write01">${pVo.divyAddr}</td>
 	</tr>
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>

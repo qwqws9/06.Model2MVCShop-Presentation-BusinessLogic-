@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Search;
@@ -21,6 +22,7 @@ import com.model2.mvc.service.domain.Purchase;
 import com.model2.mvc.service.domain.User;
 import com.model2.mvc.service.product.ProductService;
 import com.model2.mvc.service.purchase.PurchaseService;
+import com.model2.mvc.service.purchase.impl.PurchaseServiceImpl;
 import com.model2.mvc.service.user.UserService;
 
 @Controller
@@ -57,6 +59,8 @@ public class PurchaseController {
 		buyVo.setPurchaseProd(productService.getProduct(Integer.parseInt(request.getParameter("prodNo"))));
 		buyVo.setTranCode("2");
 		
+		
+		
 		System.out.println("!"+buyVo);
 		purchaseService.addPurchase(buyVo);
 		
@@ -81,6 +85,7 @@ public class PurchaseController {
 		//ProductService ps = new ProductServiceImpl();
 		
 		Product pVo = productService.getProduct(prodNo);
+		
 		
 		request.setAttribute("pVo", pVo);
 		
@@ -115,5 +120,84 @@ public class PurchaseController {
 		
 		return "forward:/purchase/listPurchase.jsp";
 	}
+	
+	@RequestMapping("/getPurchase.do")
+	public String getPurchase(@ModelAttribute("pVo") Purchase pVo,
+								@RequestParam("tranNo") int tranNo,
+								Model model) throws Exception {
+		
+		pVo = purchaseService.getPurchase(tranNo);
+		
+		String[] date = pVo.getDivyDate().split(" ");
+		pVo.setDivyDate(date[0]);
+		System.out.println("!"+date[0]);
+		
+		model.addAttribute("pVo",pVo);
+		
+		
+		return "forward:/purchase/getPurchase.jsp";
+		
+	}
+	
+	@RequestMapping("/updatePurchase.do")
+	public String updatePurchase(@ModelAttribute("uVo") User uVo,
+									@ModelAttribute("pVo") Purchase pVo) throws Exception {
+		pVo.setBuyer(uVo);
+		
+		purchaseService.updatePurcahse(pVo);
+		
+		return "redirect:/getPurchase.do?tranNo="+pVo.getTranNo();
+	}
+	
+	@RequestMapping("updatePurchaseView.do")
+	public String updatePurchaseView(@ModelAttribute("pVo") Purchase pVo,
+										Model model) throws Exception {
+		
+		
+		//Purchase pVo = new Purchase();
+		//pVo = purchaseService.getPurchase(Integer.parseInt(request.getParameter("tranNo")));
+		
+		pVo = purchaseService.getPurchase(pVo.getTranNo());
+		String[] date = pVo.getDivyDate().split(" ");
+		pVo.setDivyDate(date[0]);
+		
+		
+		model.addAttribute("pVo", pVo);
+		
+		
+		return "forward:/purchase/updatePurchaseView.jsp";
+	}
+	
+	@RequestMapping("updateTranCode.do")
+	public String updateTranCode(HttpSession session,
+								@RequestParam("code") String code,
+								Purchase pVo,
+								@RequestParam("prodNo") int prodNo,
+								User uVo
+			) throws Exception {
+		
+//		System.out.println(request.getParameter("prodNo") + "상품번호");
+//		System.out.println(request.getParameter("code") + " 트랜코드");
+		
+		
+		
+		pVo = purchaseService.getPurchase2(prodNo);
+		pVo.setTranCode(code);
+		
+		purchaseService.updateTranCode(pVo);
+		
+		
+		uVo = (User)session.getAttribute("user");
+		
+		if(uVo.getRole().equals("user")) {
+			return "redirect:/listPurchase.do";
+		}
+		
+		
+		return "redirect:/listProduct.do?menu=manage";
+	}
+	
+	
+	
 
 }

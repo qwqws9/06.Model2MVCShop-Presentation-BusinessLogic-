@@ -30,7 +30,7 @@ function resetData(){
 <body bgcolor="#ffffff" text="#000000">
 
 <form name="detailForm" method="post">
-<input type = "hidden" name = "hidden" value = "${pVo.tranNo}" />
+<input type = "hidden" name = "tranNo" value = "${pVo.tranNo}" />
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>
 		<td width="15" height="37">
@@ -100,8 +100,8 @@ function resetData(){
 		</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<input type="text" name="userName" class="ct_input_g" 
-						style="width: 100px; height: 19px" maxLength="10" minLength="6" value="${pVo.buyer.userName}" />
+			<input type="text" name="receiverName" class="ct_input_g" 
+						style="width: 100px; height: 19px" maxLength="10" minLength="6" value="${pVo.receiverName}" />
 		</td>
 	</tr>
 	<tr>
@@ -114,8 +114,8 @@ function resetData(){
 		</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<input type="text" name="userPhone" 	class="ct_input_g" 
-						style="width: 100px; height: 19px" maxLength="10" value = "${pVo.buyer.phone}">
+			<input type="text" name="receiverPhone" 	class="ct_input_g" 
+						style="width: 100px; height: 19px" maxLength="10" value = "${pVo.receiverPhone}">
 		</td>
 	</tr>
 	<tr>
@@ -126,8 +126,8 @@ function resetData(){
 		<td width="104" class="ct_write">구매자주소</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<input		type="text" name="userAddr" class="ct_input_g" 
-							style="width: 200px; height: 19px" maxLength="13" value= "${pVo.buyer.addr}"/>
+			<input		type="text" name="divyAddr" class="ct_input_g" 
+							style="width: 200px; height: 19px" maxLength="13" value= "${pVo.divyAddr}"/>
 		</td>
 	</tr>
 	<tr>
@@ -139,7 +139,7 @@ function resetData(){
 		<td width="104" class="ct_write">구매요청사항</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<input		type="text" name="userReq" class="ct_input_g" 
+			<input		type="text" name="divyRequest" class="ct_input_g" 
 							style="width: 200px; height: 19px" maxLength="13" value= "${pVo.divyRequest}"/>
 		</td>
 	</tr>
@@ -155,10 +155,10 @@ function resetData(){
 		</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01"> 
-			<input type="text" name="delDate" readonly="readonly" class="ct_input_g" 
-						style="width: 100px; height: 19px"	maxLength="10" minLength="6" value = "${pVo.divyDate}" />
+			<input type="text" name="divyDate" readonly="readonly" class="ct_input_g" 
+						style="width: 100px; height: 19px"	maxLength="10" minLength="6"  />
 				&nbsp;<img src="../images/ct_icon_date.gif" width="15" height="15" 
-										onclick="show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value)"/>
+										onclick="show_calendar('document.detailForm.divyDate', document.detailForm.divyDate.value)"/>
 		</td>
 	</tr>
 	<tr>
